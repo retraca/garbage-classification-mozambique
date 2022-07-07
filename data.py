@@ -14,7 +14,7 @@ class Data:
         return self.data[fields]
     
     def rescale_grountruth(self):
-        self.data['loc_dirty'] = self.data['loc_dirty'].apply(lambda x: str(x/2).split('.')[0])
+        #self.data['loc_dirty'] = self.data['loc_dirty'].apply(lambda x: str(x/2).split('.')[0])
         return self
     
     
