@@ -3,17 +3,12 @@ from questions import Questions
 from images import Images
 from model import Model
 
-#smaller dataset (120 samples) with stefan groundtruth
-""" stefan_data_path = 'stefanGroundtruth120.csv'
-data_stefan = Data(stefan_data_path).get_all_data() """
-
-
 #bigger dataset with field groundtruth
-all_picture_data_path = 'versions/3000relevantquestions.csv'
+all_picture_data_path = 'picturedatastefanselection.csv'
 data_all = Data(all_picture_data_path).rescale_grountruth()
-#all_picture_fields=['image1', 'image2', 'image3', 'image4', 'image5', 'loc_dirty']
-#data_simple = data_all.get_data_fields(all_picture_fields)
-data_simple = data_all.get_all_data()
+all_picture_fields=['image1', 'image2', 'image3', 'image4', 'image5', 'loc_dirty']
+data_simple = data_all.get_data_fields(all_picture_fields)
+#data_simple = data_all.get_all_data()
 print(data_simple)
 
 images_path = 'D:/Projects/2022/GarbageDetection/images'
@@ -30,29 +25,8 @@ images = Images(images_path)
 model = Model(model_path_vqa, model_path_nlvr)
 questions = Questions(positives, negatives)
 
-#TODO: get best questions from data
-""" 
-best_positives, best_negatives = questions.get_best_questions(data, images, model, 5)
+best_positives, best_negatives = questions.get_best_questions(data_simple, images, model, 5)
 print(best_positives, best_negatives) 
-"""
-""" all_questions= positives + negatives
-best_indexes= [3,6,7,8,11,15,25,33,34,35,36,37,39,41,42,47,54]
-
-best_positives=[]
-best_negatives=[]
-idx=-1
-for qst in all_questions:
-    idx+=1
-    if idx in best_indexes:
-        #print(idx, qst)
-        if idx < 32:
-            best_positives.append(qst)
-        else:
-            best_negatives.append(qst) """ 
-
-#table_scores= model.get_relevant_questions_data(data_simple, images, best_positives, best_negatives) 
+ 
 table_scores= model.get_relevant_questions_data(data_simple, images, positives, negatives, reasoning_classes, reasoning_questions) 
-
-
-#print(table_scores) 
 table_scores.to_csv(r'D:\Projects\2022\GarbageDetection\CLEAN\main.csv', index = True, header=True)
