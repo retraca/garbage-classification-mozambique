@@ -9,7 +9,7 @@ import matplotlib.image as mpimg
 
 
 
-class Model:
+class PreTrained_Model:
     def __init__(self, model_path_vqa, model_path_nlvr):
         self.model_path_vqa = model_path_vqa
         self.config_vqa = AutoConfig.from_pretrained(

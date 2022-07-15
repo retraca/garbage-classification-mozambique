@@ -22,4 +22,4 @@ for idx, row in data.iterrows():
         aux=5
     data.loc[idx, 'scaled_loc_dirty']=aux
     
-data.to_csv('1000nvlr_crashed2200_scale_of_5.csv', index=False)
+data.to_csv('main.csv', index=False)

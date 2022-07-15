@@ -1,11 +1,11 @@
 from data import Data
 from questions import Questions
 from images import Images
-from model import Model
+from model import PreTrained_Model
 
 #bigger dataset with field groundtruth
 all_picture_data_path = 'picturedatastefanselection.csv'
-data_all = Data(all_picture_data_path).rescale_grountruth()
+data_all = Data(all_picture_data_path)
 all_picture_fields=['image1', 'image2', 'image3', 'image4', 'image5', 'loc_dirty']
 data_simple = data_all.get_data_fields(all_picture_fields)
 #data_simple = data_all.get_all_data()
@@ -22,7 +22,7 @@ reasoning_classes= ['nlvr_class1', 'nlvr_class2', 'nlvr_class3', 'nlvr_class4', 
 reasoning_questions=['The left image has a lot more trash than the right image', 'The left image has a lot more waste than the right image', 'The left image shows a lot more garbage than the right image']
 
 images = Images(images_path)
-model = Model(model_path_vqa, model_path_nlvr)
+model = PreTrained_Model(model_path_vqa, model_path_nlvr)
 questions = Questions(positives, negatives)
 
 best_positives, best_negatives = questions.get_best_questions(data_simple, images, model, 5)
