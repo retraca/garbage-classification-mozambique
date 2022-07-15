@@ -25,8 +25,24 @@ images = Images(images_path)
 model = PreTrained_Model(model_path_vqa, model_path_nlvr)
 questions = Questions(positives, negatives)
 
-best_positives, best_negatives = questions.get_best_questions(data_simple, images, model, 5)
-print(best_positives, best_negatives) 
- 
-table_scores= model.get_relevant_questions_data(data_simple, images, positives, negatives, reasoning_classes, reasoning_questions) 
+""" best_positives, best_negatives = questions.get_best_questions(data_simple, images, model, 5)
+print(best_positives, best_negatives)  """
+
+all_questions= positives + negatives
+
+best_indexes= [3,6,7,8,11,15,25,33,34,35,36,37,39,41,42,47,54]
+
+best_positives=[]
+best_negatives=[]
+idx=-1
+for qst in all_questions:
+    idx+=1
+    if idx in best_indexes:
+        #print(idx, qst)
+        if idx < 32:
+            best_positives.append(qst)
+        else:
+            best_negatives.append(qst) 
+      
+table_scores= model.get_relevant_questions_data(data_simple, images, best_positives, best_negatives, reasoning_classes, reasoning_questions) 
 table_scores.to_csv(r'D:\Projects\2022\GarbageDetection\CLEAN\main.csv', index = True, header=True)
